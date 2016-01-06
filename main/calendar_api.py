@@ -104,15 +104,17 @@ def create_event(calendar_id, day_forecast):
                'timeZone': day_forecast[wgparser.timezone_id].replace('\\',''),
               }
         
-    summary = 'Bro, let\'s surf! ({0}m {1:.0f}kn {2:.0f}{3}C)'.format(day_forecast[wgparser.wave_height],
-                                                              float(day_forecast[wgparser.wind_speed]),
-                                                              float(day_forecast[wgparser.temperature]),
-                                                              u"\u00b0".encode("utf-8"))
+    summary = 'Bro, let\'s surf! ({0}m, {1:.0f}kn {2}, {3:.0f}{4}C)'.format(day_forecast[wgparser.wave_height],
+                                                                            float(day_forecast[wgparser.wind_speed]),
+                                                                            wgparser.get_wind_dir(day_forecast[wgparser.wind_direction]),
+                                                                            float(day_forecast[wgparser.temperature]),
+                                                                            u"\u00b0".encode("utf-8"))
     
     description = 'Your surf bro says that you should go surfing!\
-    \n{0}h forecast: {1} m waves, {2} knots wind, {3} {4}C'.format(day_forecast[wgparser.hour],
+    \n{0}h forecast: {1} m waves, {2} knots wind ({3}), {4} {5}C'.format(day_forecast[wgparser.hour],
                                                                    day_forecast[wgparser.wave_height],
                                                                    day_forecast[wgparser.wind_speed],
+                                                                   wgparser.get_wind_dir(day_forecast[wgparser.wind_direction]),
                                                                    day_forecast[wgparser.temperature],
                                                                    u"\u00b0".encode("utf-8"))
     

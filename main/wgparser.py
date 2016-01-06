@@ -20,7 +20,7 @@ wave_period = "PERPW"
 wave_direction = "DIRPW"
 wind_speed = "WINDSPD"
 wind_gust = "GUST"
-wind_direction = "SMERN" # FIXME
+wind_direction = "WINDDIR"
 
 def parse_array(array):
     res = []
@@ -54,6 +54,26 @@ def parse_value(value):
         return parse_unary(value)
     else:
         return parse_str(value)
+    
+def get_wind_dir(degrees):
+    value = float(degrees)
+    if value >= 337.5 or value < 22.5:
+        return "N"
+    if value >= 22.5 and value < 67.5:
+        return "NE"
+    if value >= 67.5 and value < 112.5:
+        return "E"
+    if value >= 112.5 and value < 157.5:
+        return "SE"
+    if value >= 157.5 and value < 202.5:
+        return "S"
+    if value >= 202.5 and value < 247.5:
+        return "SW"
+    if value >= 247.5 and value < 292.5:
+        return "W"
+    if value >= 292.5 and value < 337.5:
+        return "NW"
+    return "null"
 
 def get_forecast(link):
     html_doc = urllib2.urlopen(link).read()
