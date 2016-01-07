@@ -134,4 +134,5 @@ def create_event(calendar_id, day_forecast):
 
     event = service.events().insert(calendarId=calendar_id, body=event).execute()
     print('Event created day {0}:\n{1}'.format(day_forecast[wgparser.day], event.get('htmlLink')))
+    print(description)
     
