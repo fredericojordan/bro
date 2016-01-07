@@ -15,8 +15,8 @@ import wgparser
 # wind_direction
 
 TEMPERATURE_CONSTANT = 0.2
-WAVE_CONSTANT = 3
-WIND_CONSTANT = 0.0025
+WAVE_CONSTANT = 2.5
+WIND_CONSTANT = 0.001
 
 def temp_rank(temperature):
     if temperature == 'null':
@@ -38,7 +38,11 @@ def rank(temperature, wave_height, wind_speed):
     wave_height_rank = wave_rank(wave_height)
     wind_speed_rank = wind_rank(wind_speed)
     
-    return 100*temperature_rank*wave_height_rank*wind_speed_rank;
+#     return 100*temperature_rank*wave_height_rank*wind_speed_rank;
+    if temperature_rank == 0 or wave_height_rank == 0 or wind_speed_rank == 0:
+        return 0
+    else:
+        return 300/((1/temperature_rank)+(1/wave_height_rank)+(1/wind_speed_rank))
 
 def get_best(forecast):
     best_rank = 0
@@ -55,4 +59,5 @@ def get_best(forecast):
                 if isinstance(forecast[entry], list) and len(forecast[entry]) > best_rank_index }
     
     forecast.update(best_day)
+    print("{0:.2f}".format(best_rank))
     return forecast
