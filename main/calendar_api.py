@@ -90,14 +90,14 @@ def create_event(calendar_id, day_forecast):
               }
     else:
         start = {
-                 'dateTime': "{0:04.0f}-{1:02.0f}-{2:2.0f}T{3:2.0f}:00:00".format(float(surf_date.tm_year),
+                 'dateTime': "{0:04.0f}-{1:02.0f}-{2:02.0f}T{3:02.0f}:00:00".format(float(surf_date.tm_year),
                                                                                   float(surf_date.tm_mon),
                                                                                   float(surf_date.tm_mday),
                                                                                   float(surf_date.tm_hour)),
                  'timeZone': day_forecast[wgparser.timezone_id].replace('\\',''),
                 }
         end = {
-                 'dateTime': "{0:04.0f}-{1:02.0f}-{2:2.0f}T{3:2.0f}:00:00".format(float(surf_date.tm_year),
+                 'dateTime': "{0:04.0f}-{1:02.0f}-{2:02.0f}T{3:02.0f}:00:00".format(float(surf_date.tm_year),
                                                                                   float(surf_date.tm_mon),
                                                                                   float(surf_date.tm_mday),
                                                                                   float(surf_date.tm_hour)+3),
